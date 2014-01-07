@@ -48,7 +48,7 @@ class Scheduling:
         self.secret_key = app_secret_key
         self.valid_departments = {}
 
-    def request(self, uri, limit=None, page=None):
+    def request(self, uri, limit=None, page=None, debug=False):
         '''
         Make a request to the scheduling API
         '''
@@ -57,6 +57,7 @@ class Scheduling:
             req_url += '&limit=' + str(limit)
         if page is not None:
             req_url += '&page=' + str(page)
+        if debug: print('[DEBUG] GET %s' % req_url)
         req = requests.get(req_url)
         if req.status_code != 200:
             try:
@@ -70,7 +71,7 @@ class Scheduling:
         except:
             return None
 
-    def __validate_department(semester, department):
+    def __validate_department(self, semester, department):
         if semester not in self.valid_departments:
             self.valid_departments[semester] = [d['id'] for d in self.departments(semester)]
         if department not in self.valid_departments[semester]:
@@ -93,27 +94,27 @@ class Scheduling:
             departments = self.valid_departments[semester]
             return itertools.chain.from_iterable((self.courses(semester, department) for department in departments))
         department = int(department)
-        __validate_department(semester, department)
+        self.__validate_department(semester, department)
         req = self.request('/%s/departments/%d/courses' % (semester, department), limit=1000)
         if 'courses' not in req:
             return None
         return req['courses']
 
-    def course(self, semester=current_semester(), course_id=None, department=None, course_number=None):
+    def course(self, semester=current_semester(), course_number=None, department=None, course_id=None):
         '''
         Get information about a given course for a given semester
         '''
-        if course_id is not None and len(str(course_id)) == 5:
-            course_id = int(course_id)
-            req = self.request('/%s/courses/%d' % (semester, course_id))
+        if course_number is not None and len(str(course_number)) == 5:
+            course_number = int(course_number)
+            req = self.request('/%s/courses/%d' % (semester, course_number))
             if 'course' not in req:
                 return None
             return req['course']
-        elif department is not None and course_number is not None:
+        elif department is not None and course_id is not None:
             department = int(department)
-            course_number = int(course_number)
-            __validate_department(semester, department)
-            req = self.request('/%s/departments/%d/courses/%d' % (semester, department, course_number))
+            course_id = int(course_id)
+            self.__validate_department(semester, department)
+            req = self.request('/%s/departments/%d/courses/%d' % (semester, department, course_id))
             if 'course' not in req:
                 return None
             return req['course']
