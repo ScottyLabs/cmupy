@@ -1,0 +1,79 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module cmu</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>cmu</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tom/workspace/cmupy/cmu.py">/Users/tom/workspace/cmupy/cmu.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;library&nbsp;for&nbsp;ScottyLabs&nbsp;APIs<br>
+&nbsp;<br>
+Exported&nbsp;Classes:<br>
+<a href="#Scheduling">Scheduling</a>&nbsp;--&nbsp;A&nbsp;library&nbsp;for&nbsp;accessing&nbsp;ScottyLabs's&nbsp;API&nbsp;for&nbsp;CMU<br>
+<a href="#Scheduling">Scheduling</a>.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="requests.html">requests</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="cmu.html#Scheduling">Scheduling</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Scheduling">class <strong>Scheduling</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;library&nbsp;for&nbsp;accessing&nbsp;ScottyLabs's&nbsp;API&nbsp;for&nbsp;CMU&nbsp;<a href="#Scheduling">Scheduling</a>.<br>
+&nbsp;<br>
+Public&nbsp;functions:<br>
+request&nbsp;--&nbsp;Make&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;scheduling&nbsp;API<br>
+&nbsp;<br>
+departments&nbsp;--&nbsp;Get&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;the&nbsp;departments&nbsp;for&nbsp;a&nbsp;given<br>
+semester<br>
+&nbsp;<br>
+courses&nbsp;--&nbsp;Get&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;the&nbsp;courses&nbsp;under&nbsp;a&nbsp;given<br>
+department&nbsp;for&nbsp;a&nbsp;given&nbsp;semester<br>
+&nbsp;<br>
+course&nbsp;--&nbsp;Get&nbsp;information&nbsp;about&nbsp;a&nbsp;given&nbsp;course&nbsp;for&nbsp;a&nbsp;given<br>
+semester<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Scheduling-__init__"><strong>__init__</strong></a>(self, app_id<font color="#909090">=None</font>, app_secret_key<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Scheduling-course"><strong>course</strong></a>(self, semester<font color="#909090">='S14'</font>, course_id<font color="#909090">=None</font>, department<font color="#909090">=None</font>, course_number<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;information&nbsp;about&nbsp;a&nbsp;given&nbsp;course&nbsp;for&nbsp;a&nbsp;given&nbsp;semester</tt></dd></dl>
+
+<dl><dt><a name="Scheduling-courses"><strong>courses</strong></a>(self, semester<font color="#909090">='S14'</font>, department<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;the&nbsp;courses&nbsp;under&nbsp;a&nbsp;given&nbsp;department&nbsp;for<br>
+a&nbsp;given&nbsp;semester</tt></dd></dl>
+
+<dl><dt><a name="Scheduling-departments"><strong>departments</strong></a>(self, semester<font color="#909090">='S14'</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;the&nbsp;departments&nbsp;for&nbsp;a&nbsp;given&nbsp;semester</tt></dd></dl>
+
+<dl><dt><a name="Scheduling-request"><strong>request</strong></a>(self, uri, limit<font color="#909090">=None</font>, page<font color="#909090">=None</font>)</dt><dd><tt>Make&nbsp;a&nbsp;request&nbsp;to&nbsp;the&nbsp;scheduling&nbsp;API</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-current_semester"><strong>current_semester</strong></a>()</dt><dd><tt>Returns&nbsp;the&nbsp;most&nbsp;recent&nbsp;semester&nbsp;that&nbsp;the&nbsp;APIs&nbsp;will&nbsp;have&nbsp;data&nbsp;for</tt></dd></dl>
+</td></tr></table>
+</body></html>

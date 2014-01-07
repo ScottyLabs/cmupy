@@ -36,7 +36,8 @@ class Scheduling:
     courses -- Get a list of all the courses under a given
     department for a given semester
 
-    course -- Get information about a given course for a given semester
+    course -- Get information about a given course for a given
+    semester
 
     '''
 
@@ -48,6 +49,9 @@ class Scheduling:
         self.valid_departments = {}
 
     def request(self, uri, limit=None, page=None):
+        '''
+        Make a request to the scheduling API
+        '''
         req_url = 'https://apis.scottylabs.org/v1/schedule%s?app_id=%s&app_secret_key=%s' % (uri, self.id, self.secret_key)
         if limit is not None:
             req_url += '&limit=' + str(limit)
@@ -73,9 +77,16 @@ class Scheduling:
             raise ValueError('%d is not a valid department for semester %s' % (int(department), semester))
 
     def departments(self, semester=current_semester()):
+        '''
+        Get a list of all the departments for a given semester
+        '''
         return self.request('/%s/departments/' % semester, limit=100)['departments']
 
     def courses(self, semester=current_semester(), department=None):
+        '''
+        Get a list of all the courses under a given department for
+        a given semester
+        '''
         if department is None:
             if semester not in self.valid_departments:
                 self.valid_departments[semester] = [d['id'] for d in self.departments(semester)]
@@ -89,6 +100,9 @@ class Scheduling:
         return req['courses']
 
     def course(self, semester=current_semester(), course_id=None, department=None, course_number=None):
+        '''
+        Get information about a given course for a given semester
+        '''
         if course_id is not None and len(str(course_id)) == 5:
             course_id = int(course_id)
             req = self.request('/%s/courses/%d' % (semester, course_id))
