@@ -2,8 +2,8 @@
 
 **cmupy** is a Python library for [ScottyLabs CMU APIs](https://apis.scottylabs.org).
 
-To use the library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library:
-
+## Usage
+To use the library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library, you need to install [requests](http://docs.python-requests.org/en/latest/) as a dependency and include `cmu.py` in your app.
 ```python
 import cmu
 

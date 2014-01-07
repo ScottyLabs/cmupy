@@ -1,1 +1,1 @@
-requests=2.0.x
+requests==2.1.0
