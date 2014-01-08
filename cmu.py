@@ -10,8 +10,8 @@ Scheduling.
 
 import datetime
 import itertools
-
-import requests
+import json
+import urllib2
 
 def current_semester():
     '''
@@ -58,16 +58,17 @@ class Scheduling:
         if page is not None:
             req_url += '&page=' + str(page)
         if debug: print('[DEBUG] GET %s' % req_url)
-        req = requests.get(req_url)
-        if req.status_code != 200:
+        req = urllib2.Request(req_url)
+        handler = urllib2.urlopen(req)
+        if handler.getcode() != 200:
             try:
-                return req.json()
+                return json.load(handler.fp)
             except:
                 return {
-                    'error': '%d: %s' % (req.status_code, req.reason)
+                    'error': '%d: %s' % (handler.getcode(), handler.msg)
                 }
         try:
-            return req.json()
+            return json.load(handler.fp)
         except:
             return None
 
