@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+import sys
 import urllib
 import urllib2
 
@@ -30,20 +31,29 @@ class Directory:
         '''
         def parse_person_soup(soup):
             # this function name is more terrifying than I intended
+            data = []
+
             if soup.find(id='no_results_error'):
                 return None
 
             results = soup.find(id='search_results')
-            if 'people matched your search criteria' in results.h1.get_text():
+            name_line = results.h1.get_text().strip()
+            if 'people matched your search criteria' in name_line:
                 raise ValueError('Not a directory page: %s' % results.h1.get_text())
+            name_toks = [tok.strip() for tok in name_line.split() if len(tok.strip()) > 0]
+            if '(' in name_toks[-1]:
+                data.append(('Affiliation', name_toks[-1][1:-1]))
+                data.append(('Name', ' '.join(name_toks[:-1])))
+            else:
+                data.append(('Name', ' '.join(name_toks)))
 
             sections = results.find_all(class_='directory_section')
             def parse_info_line(info_line):
                 key = info_line.find_all(class_='directory_field')[0].get_text().strip()
                 key = key[:len(key)-1] # strip out colon
-                value = info_line.get_text().split(':')[1].strip()
-                return (key, value)
-            data = []
+                value = ':'.join(info_line.get_text().split(':')[1:]).strip()
+                return (key, ' '.join(value.split()))
+
             for section in sections:
                 lines = section.find_all('div')
                 if len(lines) == 1:
@@ -75,5 +85,8 @@ class Directory:
             return ValueError('Must provide either a search query or a valid Andrew ID.')
 
 if __name__ == '__main__':
-    print("Results of 'tom' query: \n%s" % str(Directory.get_info('tom')))
-    print("zhixians's info: \n%s" % str(Directory.get_info(andrewid='zhixians')))
+    try:
+        info = Directory.get_info(andrewid=sys.argv[1])
+        print(info)
+    except:
+        print('usage: ./directory.py [andrewid]')
