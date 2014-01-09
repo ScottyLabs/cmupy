@@ -86,6 +86,42 @@ You can omit the semester parameter to use the current semester's data by defaul
 
 More documentation can be found in [docs.html](https://rawgithub.com/tomshen/cmupy/master/cmu.html).
 
+## Directory
+To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `directory.py` in your app.
+
+```python
+>>> from directory import Directory
+>>> Directory.get_info(andrewid='zhixians')
+{
+  u'Website': u'...',
+  u'Andrew UserID': u'...',
+  u'Student Class Level': u'...',
+  u'On Campus': u'...',
+  u'Department with which this person is affiliated': u'...',
+  u'Advisor': u'...',
+  u'Job Title According to HR': u'...',
+  u'Preferred Name': u'...',
+  u'Email': u'...'
+}
+>>> Directory.get_info('tom')
+[
+  {
+    u'Last Name': u'...',
+    u'First Name': u'Tom',
+    u'Andrew UserID': u'...',
+    u'Department': u'...',
+    u'Affiliation': u'...'
+  },
+  .
+  .
+  .
+]
+```
+
+If you provide an Andrew ID, `get_info` will raise an exception if it's not a valid Andrew ID that uniquely indentifies a person, or return a dictionary containing information about the person identified by that Andrew ID.
+
+If you otherwise provide a query, `get_info` will return a list of all the people who match that query, or an empty list if no people match that query. You can than obtain more information about each person by looking up that person individually by Andrew ID.
+
 ## Printer Status
 To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `printing.py` in your app.
 
