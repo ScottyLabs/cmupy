@@ -43,7 +43,7 @@ class Scheduling:
 
     def __init__(self, app_id=None, app_secret_key=None):
         if not app_id or not app_secret_key:
-            raise 'Using the Scheduling API requires an app ID and an app secret key'
+            raise ValueError('Using the Scheduling API requires an app ID and an app secret key')
         self.id = app_id
         self.secret_key = app_secret_key
         self.valid_departments = {}
