@@ -1,9 +1,14 @@
 # cmupy
 **cmupy** is a Python library for CMU data. Scheudling API data uses the [ScottyLabs CMU APIs](https://apis.scottylabs.org).
+### Table of Contents
+* [Scheduling](#scheduling)
+* [Directory](#directory)
+* [Printer Status](#printer-status)
 
 ## APIs
 To use this library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library, you simply need to include `apis.py` in your app.
 
+<a name="scheduling"/>
 ### Scheduling
 
 ```python
@@ -21,29 +26,12 @@ To use this library, you must be affiliated with CMU. Register your application 
 >>> schedule.courses(semester='S14', department=15) # fairly slow
 [
   {
-    u'units': 3,
-    u'lectures': [
-      {
-        u'time_start': u'TBA',
-        u'section': u'A',
-        u'instructors': u'Cortina',
-        u'days': u'TBA',
-        u'time_end': u'TBA',
-        u'location': u'DNM DNM',
-        u'meetings': [
-          {
-            u'location': u'DNM DNM',
-            u'time_start': u'TBA',
-            u'days': u'TBA',
-            u'time_end':
-            u'TBA'
-          }
-        ]
-      }
-    ],
     u'number': u'15090',
     u'name': u'Computer Science Practicum',
-    u'department_id': 15
+    u'department_id': 15,
+    .
+    .
+    .
   },
   .
   .
@@ -86,6 +74,7 @@ You can omit the semester parameter to use the current semester's data by defaul
 
 More documentation can be found in [docs.html](https://rawgithub.com/tomshen/cmupy/master/cmu.html).
 
+<a name="directory"/>
 ## Directory
 To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `directory.py` in your app.
 
@@ -122,6 +111,7 @@ If you provide an Andrew ID, `get_info` will raise an exception if it's not a va
 
 If you otherwise provide a query, `get_info` will return a list of all the people who match that query, or an empty list if no people match that query. You can than obtain more information about each person by looking up that person individually by Andrew ID.
 
+<a name="printer-status"/>
 ## Printer Status
 To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `printing.py` in your app.
 
