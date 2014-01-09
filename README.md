@@ -7,16 +7,79 @@ To use this library, you must be affiliated with CMU. Register your application 
 ### Scheduling
 
 ```python
-import cmu
+>>> import cmu
+>>> schedule = cmu.Scheduling(app_id='YOUR_APP_ID', app_secret_key='YOUR_SECRET_KEY')
+>>> schedule.departments(semester='S14')
+[
+  {u'id': 31, u'name': u'Aerospace Studies-ROTC'},
+  {u'id': 48, u'name': u'Architecture'},
+  .
+  .
+  .
+  {u'id': 47, u'name': u'Tepper School of Business'}
+]
+>>> schedule.courses(semester='S14', department=15) # fairly slow
+[
+  {
+    u'units': 3,
+    u'lectures': [
+      {
+        u'time_start': u'TBA',
+        u'section': u'A',
+        u'instructors': u'Cortina',
+        u'days': u'TBA',
+        u'time_end': u'TBA',
+        u'location': u'DNM DNM',
+        u'meetings': [
+          {
+            u'location': u'DNM DNM',
+            u'time_start': u'TBA',
+            u'days': u'TBA',
+            u'time_end':
+            u'TBA'
+          }
+        ]
+      }
+    ],
+    u'number': u'15090',
+    u'name': u'Computer Science Practicum',
+    u'department_id': 15
+  },
+  .
+  .
+  .
+]
 
-schedule = cmu.Scheduling(app_id='YOUR_APP_ID', app_secret_key='YOUR_SECRET_KEY')
-
-departments = schedule.departments(semester='S14')
-cs_courses = schedule.courses(semester='S14', department=15)
-
-# the following are equivalent
-course_data = schedule.course(semester='S14', course_number=15251)
-course_data = schedule.course(semester='S14', department=15, course_id=251)
+>>> # the following are equivalent
+>>> schedule.course(semester='S14', course_number=15090)
+>>> schedule.course(semester='S14', course_number='15090')
+>>> schedule.course(semester='S14', department=15, course_id=90)
+>>> schedule.course(semester='S14', department='15', course_id='090')
+{
+  u'units': 3,
+  u'lectures': [
+    {
+      u'time_start': u'TBA',
+      u'section': u'A',
+      u'instructors': u'Cortina',
+      u'days': u'TBA',
+      u'time_end': u'TBA',
+      u'location': u'DNM DNM',
+      u'meetings': [
+        {
+          u'location': u'DNM DNM',
+          u'time_start': u'TBA',
+          u'days': u'TBA',
+          u'time_end':
+          u'TBA'
+        }
+      ]
+    }
+  ],
+  u'number': u'15090',
+  u'name': u'Computer Science Practicum',
+  u'department_id': 15
+}
 ```
 
 You can omit the semester parameter to use the current semester's data by default. Department IDs, course numbers, and course IDs can be either strings or integers.

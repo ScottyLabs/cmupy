@@ -73,10 +73,11 @@ class Scheduling:
             return None
 
     def __validate_department(self, semester, department):
+        department = int(department)
         if semester not in self.valid_departments:
             self.valid_departments[semester] = [d['id'] for d in self.departments(semester)]
         if department not in self.valid_departments[semester]:
-            raise ValueError('%d is not a valid department for semester %s' % (int(department), semester))
+            raise ValueError('%d is not a valid department for semester %s' % (department, semester))
 
     def departments(self, semester=current_semester()):
         '''
@@ -105,17 +106,21 @@ class Scheduling:
         '''
         Get information about a given course for a given semester
         '''
-        if course_number is not None and len(str(course_number)) == 5:
-            course_number = int(course_number)
-            req = self.request('/%s/courses/%d' % (semester, course_number))
+        def pad_string_with_zeros(s, expected_len):
+            if len(s) < expected_len:
+                return '0' * (expected_len - len(s)) + s
+            return s
+        if course_number is not None:
+            course_number = pad_string_with_zeros(str(course_number), 5)
+            req = self.request('/%s/courses/%s' % (semester, course_number))
             if 'course' not in req:
                 return None
             return req['course']
         elif department is not None and course_id is not None:
-            department = int(department)
-            course_id = int(course_id)
             self.__validate_department(semester, department)
-            req = self.request('/%s/departments/%d/courses/%d' % (semester, department, course_id))
+            department = pad_string_with_zeros(str(department), 2)
+            course_id = pad_string_with_zeros(str(course_id), 3)
+            req = self.request('/%s/departments/%s/courses/%s' % (semester, department, course_id))
             if 'course' not in req:
                 return None
             return req['course']
