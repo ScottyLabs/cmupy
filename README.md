@@ -5,6 +5,7 @@
 To use this library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library, you simply need to include `cmu.py` in your app.
 
 ### Scheduling
+
 ```python
 import cmu
 
@@ -24,6 +25,7 @@ More documentation can be found in [docs.html](https://rawgithub.com/tomshen/cmu
 
 ## Printer Status
 To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `printerstatus.py` in your app.
+
 ```python
 >>> from printerstatus import PrinterStatus
 >>> ps = PrinterStatus()
@@ -39,3 +41,5 @@ To use this library, you need to install [Beautiful Soup 4](http://www.crummy.co
   'library - hunt 1 ref 1 b&w': {'status': 'not ready', 'details': 'no response'}
 }
 ```
+
+You can look up a printer by calling `get_status` using a string containing any part of a printer's name. For example, `'Mudge'`, `'Mudge B&W'`, and `'housing - mudge b&w'` will all return the status of the printer in Mudge.
