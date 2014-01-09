@@ -6,7 +6,7 @@ import unicodedata
 
 from bs4 import BeautifulSoup
 
-class PrinterStatus:
+class Status:
     def __init__(self):
         status_url = 'https://clusters.andrew.cmu.edu/printerstats/'
         req = urllib2.Request(status_url)
@@ -93,5 +93,5 @@ class PrinterStatus:
         return copy.deepcopy(self.status)
 
 if __name__ == '__main__':
-    ps = PrinterStatus()
+    ps = Status()
     print('Status of Gates 3 printer:\n%s' % str(ps.get_status('Gates 3')))

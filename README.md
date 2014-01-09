@@ -2,13 +2,13 @@
 **cmupy** is a Python library for CMU data. Scheudling API data uses the [ScottyLabs CMU APIs](https://apis.scottylabs.org).
 
 ## APIs
-To use this library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library, you simply need to include `cmu.py` in your app.
+To use this library, you must be affiliated with CMU. Register your application with [apis@cmu](https://apis.scottylabs.org/apps) to get an app ID and an app secret key. Then, to use the library, you simply need to include `apis.py` in your app.
 
 ### Scheduling
 
 ```python
->>> import cmu
->>> schedule = cmu.Scheduling(app_id='YOUR_APP_ID', app_secret_key='YOUR_SECRET_KEY')
+>>> import apis
+>>> schedule = apis.Scheduling(app_id='YOUR_APP_ID', app_secret_key='YOUR_SECRET_KEY')
 >>> schedule.departments(semester='S14')
 [
   {u'id': 31, u'name': u'Aerospace Studies-ROTC'},
@@ -87,11 +87,11 @@ You can omit the semester parameter to use the current semester's data by defaul
 More documentation can be found in [docs.html](https://rawgithub.com/tomshen/cmupy/master/cmu.html).
 
 ## Printer Status
-To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `printerstatus.py` in your app.
+To use this library, you need to install [Beautiful Soup 4](http://www.crummy.com/software/BeautifulSoup/) (`pip install beautifulsoup4`) as a dependency, and include `printing.py` in your app.
 
 ```python
->>> from printerstatus import PrinterStatus
->>> ps = PrinterStatus()
+>>> import printing
+>>> ps = printing.Status()
 >>> ps.get_status('gates 3')
 {'status': 'ready', 'details': 'ready'}
 >>> ps.get_all_statuses()
