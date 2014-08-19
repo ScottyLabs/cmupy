@@ -9,7 +9,8 @@ from bs4 import BeautifulSoup
 
 def valid_andrew_id(andrewid):
     # regex written by Jacob Zimmerman
-    return type(andrewid) is str and re.match(r'^[a-zA-Z][a-zA-Z0-9]{1,7}$', andrewid) is not None
+    return (type(andrewid) is str or type(andrewid) is unicode) \
+            and re.match(r'^[a-zA-Z][a-zA-Z0-9]{1,7}$', andrewid) is not None
 
 class Directory:
     base_url = 'http://directory.andrew.cmu.edu'
