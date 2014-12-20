@@ -1,5 +1,5 @@
 # cmupy
-**cmupy** is a Python library for CMU data. Scheudling API data uses the [ScottyLabs CMU APIs](https://apis.scottylabs.org).
+**cmupy** is a Python library for CMU data. Scheduling API data uses the [ScottyLabs CMU APIs](https://apis.scottylabs.org).
 ### Table of Contents
 * [Scheduling](#scheduling)
 * [Directory](#directory)
